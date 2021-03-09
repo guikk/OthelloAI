@@ -1,5 +1,7 @@
 __pycache__/
 *.zip
 .vscode/
+move.txt
 state.txt
 history.txt
+results.xml
