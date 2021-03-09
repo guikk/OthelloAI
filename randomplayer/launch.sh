@@ -1,2 +1,2 @@
 #!/bin/bash
-python randomplayer.py $1 $2
+python3 randomplayer.py $1 $2

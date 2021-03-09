@@ -1,2 +1,2 @@
 #!/bin/bash
-python otto.py $1 $2
+python3 otto.py $1 $2
