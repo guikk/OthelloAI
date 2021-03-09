@@ -1,0 +1,5 @@
+__pycache__/
+*.zip
+.vscode/
+state.txt
+history.txt
