@@ -14,11 +14,16 @@ def make_move(the_board, color_str):
     color = board.Board.WHITE if color_str == 'white' else board.Board.BLACK
 
     raiz = NoMax(0, color, None, the_board, None)
-    raiz.valor_max(-10000,10000)
-    no = raiz
-    while no != None:
-        print(no.altura, no.move, no.color, no.valor)
-        no = no.next
+
+    for max_height in range(3,10,2):
+        raiz.valor_max(-10000,10000, max_height)
+        f = open('move.txt', 'w')
+        f.write('%d,%d' % raiz.next.move)
+        f.close()
+    # no = raiz
+    # while no != None:
+    #     print(no.altura, no.move, no.color, no.valor)
+    #     no = no.next
     print("choice:", raiz.next.move)
     return raiz.next.move
 
