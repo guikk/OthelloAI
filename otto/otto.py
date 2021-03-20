@@ -14,7 +14,7 @@ def make_move(the_board, color_str):
     color = board.Board.WHITE if color_str == 'white' else board.Board.BLACK
 
     raiz = NoMax(0, color, None, the_board, None)
-    raiz.valor_max()
+    raiz.valor_max(-10000,10000)
     no = raiz
     while no != None:
         print(no.altura, no.move, no.color, no.valor)
