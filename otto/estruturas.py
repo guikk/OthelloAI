@@ -28,6 +28,16 @@ class No:
 
   def count_value(self, color):
     v = self.current_board.piece_count[color]
+
+    if self.current_board.tiles[0][0] == color:
+      v += 2
+    if self.current_board.tiles[0][7] == color:
+      v += 2
+    if self.current_board.tiles[7][0] == color:
+      v += 2
+    if self.current_board.tiles[7][7] == color:
+      v += 2
+
     for i in range(8):
       if self.current_board.tiles[i][0] == color:
         v += 2
@@ -36,7 +46,39 @@ class No:
       if self.current_board.tiles[0][i] == color:
         v += 2
       if self.current_board.tiles[7][i] == color:
-        v += 1
+        v += 2
+      
+      if self.current_board.tiles[i][1] == color:
+        if i>0 and self.current_board.tiles[i-1][0] == board.Board.EMPTY:
+          v -= 1
+        if self.current_board.tiles[i][0] == board.Board.EMPTY:
+          v -= 1
+        if i<7 and self.current_board.tiles[i+1][0] == board.Board.EMPTY:
+          v -= 1
+      
+      if self.current_board.tiles[i][6] == color:
+        if i>0 and self.current_board.tiles[i-1][7] == board.Board.EMPTY:
+          v -= 1
+        if self.current_board.tiles[i][7] == board.Board.EMPTY:
+          v -= 1
+        if i<7 and self.current_board.tiles[i+1][7] == board.Board.EMPTY:
+          v -= 1
+          
+      if self.current_board.tiles[1][i] == color:
+        if i>0 and self.current_board.tiles[0][i-1] == board.Board.EMPTY:
+          v -= 1
+        if self.current_board.tiles[0][i] == board.Board.EMPTY:
+          v -= 1
+        if i<7 and self.current_board.tiles[0][i+1] == board.Board.EMPTY:
+          v -= 1
+      
+      if self.current_board.tiles[6][i] == color:
+        if i>0 and self.current_board.tiles[7][i-1] == board.Board.EMPTY:
+          v -= 1
+        if self.current_board.tiles[7][i] == board.Board.EMPTY:
+          v -= 1
+        if i<7 and self.current_board.tiles[7][i+1] == board.Board.EMPTY:
+          v -= 1
     return v
 
 class NoMax(No):
