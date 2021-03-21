@@ -2,6 +2,7 @@ import sys
 import copy
 from time import time
 from estruturas import NoMax
+from util import estimate_size
 sys.path.append('..')
 from common import board
 
@@ -15,17 +16,19 @@ def make_move(the_board, color_str):
 
     raiz = NoMax(0, color, None, the_board, None)
 
-    for max_height in range(3,10,2):
+    start = time()
+    for max_height in range(3,12,2):
         raiz.valor_max(-10000,10000, max_height)
+        
+        print("choice:", raiz.next.move, f"altura {max_height}, {raiz.count} nós explorados;", f"{time()-start:.2f}s")
+        print("estimate size", estimate_size(raiz))
+
         f = open('move.txt', 'w')
         f.write('%d,%d' % raiz.next.move)
         f.close()
-    # no = raiz
-    # while no != None:
-    #     print(no.altura, no.move, no.color, no.valor)
-    #     no = no.next
-    print("choice:", raiz.next.move)
-    return raiz.next.move
+
+    move = raiz.next.move
+    return move
 
 
 if __name__ == '__main__':
