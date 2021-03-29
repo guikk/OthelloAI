@@ -88,10 +88,9 @@ class NoMax(No):
       self.legal_moves = self.current_board.legal_moves(self.color)
     
     if self.altura >= max_height or len(self.legal_moves) == 0:
-      alfa = self.count_value(self.color)
-      return alfa
+      return self.count_value(self.color)
     
-    alfa = -10000
+    v = -10000
 
     for index, move in enumerate(self.legal_moves):
       
@@ -106,7 +105,7 @@ class NoMax(No):
         del next_board
         self.explored[move] = next_min
 
-      v = next_min.valor_min(alfa, beta, max_height)
+      v = max(v, next_min.valor_min(alfa, beta, max_height))
       if v > alfa:
         self.legal_moves.pop(index)
         self.legal_moves.insert(0,move)
@@ -114,9 +113,9 @@ class NoMax(No):
         self.next = next_min
       
       if beta < alfa:
-        return alfa
+        break
 
-    return alfa
+    return v
     
 
 class NoMin(No):
@@ -127,10 +126,9 @@ class NoMin(No):
 
     if self.altura >= max_height or len(self.legal_moves) == 0:
       next_color = board.Board.WHITE if self.color == board.Board.BLACK else board.Board.BLACK
-      beta = self.count_value(next_color)
-      return beta
+      return self.count_value(next_color)
 
-    beta = 10000
+    v = 10000
 
     for index, move in enumerate(self.legal_moves):
       
@@ -145,7 +143,7 @@ class NoMin(No):
         del next_board
         self.explored[move] = next_max
 
-      v = next_max.valor_max(alfa, beta, max_height)
+      v = min(v, next_max.valor_max(alfa, beta, max_height))
       if v < beta:
         self.legal_moves.pop(index)
         self.legal_moves.insert(0,move)
@@ -153,6 +151,6 @@ class NoMin(No):
         self.next = next_max
 
       if alfa > beta:
-        return beta
+        break
 
-    return beta
+    return v
