@@ -8,3 +8,4 @@ https://en.wikipedia.org/wiki/Reversi
 
 ## Our player
 Chooses its next move with the Minimax algorithm and alpha-beta pruning.
+Tries to dominate the corner and edge pieces, while avoiding leaving those spots free for the opponent.
